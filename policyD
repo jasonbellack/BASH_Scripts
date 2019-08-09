@@ -1,0 +1,6 @@
+#!/bin/bash
+for POLICYID in `aws iam list-policies --scope Local | jq -r '.Policies | .[] | .PolicyId'`;
+do for DESCRIPTION in `aws organizations describe-policy --policy-id p-$POLICYID 
+do echo $POLICYID $DESCRIPTION;
+done;
+done
