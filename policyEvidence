@@ -1,0 +1,8 @@
+#!/bin/bash
+for USER in `aws iam list-users | jq -r '.Users | .[] | .UserName'`;
+do for GROUP in `aws iam list-groups-for-user --user-name $USER | jq -r '.Groups | .[] | .GroupName'`;
+do for POLICIES in `aws iam list-attached-group-policies --group-name $GROUP | jq -r '.AttachedPolicies | .[] | .PolicyName'`;
+do echo $USER $GROUP $POLICIES;
+done;
+done;
+done
